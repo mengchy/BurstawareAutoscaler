@@ -4,7 +4,7 @@ Source code of paper `A Robust Burst-aware Autoscaling Framework for SLA Assuran
 
 The overview of the RBA framework shown as a MAPE loop: (a) Cloud-based system that provides Monitoring and Execution; (b) Burst-aware autoscaler for Analysis and Planning includes *Workloads Prediction, Burst Detection \& Handling, Resource Estimation*, and *Estimation Enhancement*.
 
-![](/Users/mcod/Desktop/RBA/overview.svg)
+![](./overview.svg)
 
 ## Require
 
