@@ -1,8 +1,8 @@
 # Burst-aware Autoscaler
 
-Source code of paper `A Robust Burst-aware Autoscaling Framework for SLA Assurance and Cost Efficiency` submit to ICSE 2024. 
+Source code of paper `Multi-Level ML Based Burst-Aware Autoscaling for SLO Assurance and Cost Efficiency` submit to TSC. 
 
-The overview of the RBA framework shown as a MAPE loop: (a) Cloud-based system that provides Monitoring and Execution; (b) Burst-aware autoscaler for Analysis and Planning includes *Workloads Prediction, Burst Detection \& Handling, Resource Estimation*, and *Estimation Enhancement*.
+The overview of the proposal shown as a MAPE loop: (a) Cloud-based system that provides Monitoring and Execution; (b) Burst-aware autoscaler for Analysis and Planning includes *Workloads Prediction, Burst Detection \& Handling, Resource Estimation*, and *Estimation Enhancement*.
 
 ![](./overview.svg)
 
