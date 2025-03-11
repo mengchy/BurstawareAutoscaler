@@ -2,6 +2,8 @@
 
 This is the origin python implementation of BASE in the following paper: `Burst-Aware Autoscaling via Stacked Ensembles: Balancing SLO Assurance and Cost Efficiency`. 
 
+**Note: We are refining the REDME documentation.**
+
 ## Require
 
 ```
