@@ -1,10 +1,6 @@
-# Burst-aware Autoscaler
+# BASE: A Burst-aware Autoscaler via Stacked Ensembles
 
-Source code of paper `Multi-Level ML Based Burst-Aware Autoscaling for SLO Assurance and Cost Efficiency` submit to TSC. 
-
-The overview of the proposal shown as a MAPE loop: (a) Cloud-based system that provides Monitoring and Execution; (b) Burst-aware autoscaler for Analysis and Planning includes *Workloads Prediction, Burst Detection \& Handling, Resource Estimation*, and *Estimation Enhancement*.
-
-![](./overview.svg)
+This is the origin python implementation of BASE in the following paper: `Burst-Aware Autoscaling via Stacked Ensembles: Balancing SLO Assurance and Cost Efficiency`. 
 
 ## Require
 
@@ -26,8 +22,15 @@ cd k6
 bash background.sh 
 ```
 
-### Autoscale
+### Autoscaling on Kubernetes
 
 ```bash
+python -u main.py
+```
+
+### Autoscaling on Simulation
+
+```bash
+cd simulation
 python -u main.py
 ```
