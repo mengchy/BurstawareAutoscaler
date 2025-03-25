@@ -1,5 +1,7 @@
 # BASE: Burst-aware Autoscaling via Stacked Ensembles
 
+**NOTE:** Documentation is being progressively improved!
+
 ## Introduction
 BASE is a machine-learning-based autoscaling framework for containerized cloud services and applications. It leverages a stacked ensemble of models to mitigate Service-Level Objective (SLO) violations while minimizing resource costs under dynamic workloads. BASE features a novel burst detection mechanism to distinguish between predictable workload peaks and actual bursts, ensuring efficient and adaptive resource allocation.
 
