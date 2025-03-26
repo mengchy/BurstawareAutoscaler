@@ -16,6 +16,7 @@ BASE is a machine-learning-based autoscaling framework for containerized cloud s
 - Istio (v1.14+)
 - Python (>=3.8)
 - Docker
+- Grafana K6
 - Prometheus & Grafana for monitoring
 
 ### Setup Instructions
@@ -28,25 +29,70 @@ BASE is a machine-learning-based autoscaling framework for containerized cloud s
    ```bash
    pip install -r requirements.txt
    ```
-3. Deploy to Kubernetes:
+3. Deploy the benchmark application to Kubernetes:
    ```bash
-   kubectl apply -f deployment.yaml
+   kubectl apply -f ./app/app.yaml
    ```
 
 ## Usage
-### Running BASE
-1. Start monitoring services:
+### Running BASE on Kubernetes：
+1. Start workload sending backend:
    ```bash
-   ./scripts/start_monitoring.sh
+   bash ./k6/background.sh
    ```
-2. Launch BASE autoscaler:
+2. Modify `config.json` to configure experiment settings：
+    ```json
+   {
+    "k6_server_addr": ["10.186.117.4:6565","10.186.117.5:6565","10.186.117.7:6565","10.186.117.8:6565"],
+    "prometheus_addr": "127.0.0.1:30090",
+    "prometheus_query_interval": "1m",
+     ...
+    "method": "onestep",
+    "cur_mode": "vali",
+    "time_interval": 120, 
+    "interval_start": 1000,
+    "interval_length": 720,
+    "hyperparameter":[{
+        "workload_name": "2018_FIFA_World_Cup",
+        "start_point": 30,
+        "train_step": 6000,
+        "vali_step": 2000,
+        "test_step": 2000,
+        "des_mean": 500,
+        "des_std": 175,
+        "sla": 16,
+        "action_max": 10}]
+    }
+   ```
+4. Launch BASE autoscaler:
    ```bash
-   python main.py --config config.yaml
+   python main.py --config_filename config.json
    ```
-
-### Configuration
-Modify `config.yaml` to set workload parameters, SLO thresholds, and scaling policies.
-
+### Running BASE on Simulation：
+1. Go to the simulation directory:
+   ```bash
+   cd ./simulator
+   ```
+2. Modify `main.json` to set workload parameters, SLO thresholds, and scaling policies:
+   ```python
+   aim_csv_file = "validate_output.csv" # Output flie
+   sla=16   # SLO thresholds
+   data_list = ["2018_FIFA_World_Cup","Barack_Obama","Donald_Trump","Elizabeth_II","Elon_Musk","Facebook","Game_of_Thrones","Google","United_States","YouTube"]
+   reward_ratio_change_list = [0.1]
+   ...
+   # Choose scaling policies
+   choose_use_ppo = True                      # BASE
+   choose_use_burst_aware_prediction = False  # BAPA
+   choose_use_asarsa = False                   # A-SARSA
+   choose_use_onestep_prediction = False      # ShortPred
+   choose_use_multistep_prediction = False      # LongPred
+   choose_use_reactive_threshold = False       # K8S-HPA
+   ```
+3. Launch BASE autoscaler:
+   ```bash
+   python main.py
+   ```
+   
 ## Experiments
 BASE has been validated using real-world workloads from the Wikimedia dataset, including Google, YouTube, Facebook, and more. Experimental results demonstrate superior performance in reducing SLO violations while maintaining cost efficiency.
 
@@ -55,8 +101,8 @@ If you use BASE in your research, please cite our paper:
 ```bibtex
 @article{BASE2025,
   title={Burst-Aware Autoscaling via Stacked Ensembles: Balancing SLO Assurance and Cost Efficiency},
-  author={Your Name et al.},
-  journal={IEEE ICWS},
+  author={XXX et al.},
+  journal={ICWS},
   year={2025}
 }
 ```
@@ -65,11 +111,11 @@ If you use BASE in your research, please cite our paper:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributors
-- Your Name (@your-github)
+- XXX (@your-github)
 - Collaborators (@collaborator-github)
 
 ## Acknowledgments
 We thank the open-source community for providing the tools and datasets that made this research possible.
 
 ## Contact
-For questions or collaboration, please open an issue or contact `your-email@example.com`.
+For questions or collaboration, please open an issue or contact `XXX@example.com`.
